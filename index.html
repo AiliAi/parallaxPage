@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Parallax</title>
+</head>
+<body onmouseout="clearCoor()">
+    <div class="hero-picture">
+        <img src="img/foregroundIn.png" alt="">
+    </div>
+    <div>
+    <div id="mouse" class="design">Move your mouse</div><br>
+    <div id="mouse-center" class="design">Move your mouse</div>
+    </div>
+
+<script>
+    const person = document.querySelector('.hero-picture > img');
+    const mouse = document.getElementById("mouse");
+    const mouseCenter = document.getElementById("mouse-center");
+    
+    document.addEventListener('mousemove', evt => {
+        coordinatesLR(evt);
+        coordinatesC(evt);
+    });
+
+    const coordinatesLR = e => {
+      let mouseX = e.clientX;
+      let mouseY = e.clientY;
+      let coor = "From the top left</br> X: " + mouseX + ", Y: " + mouseY;
+      mouse.innerHTML = coor;
+    };
+
+    const coordinatesC = e => { 
+        let centerW = window.innerWidth/2;
+        let centerH = window.innerHeight/2;
+        let mouseX = e.clientX - centerW;
+        let mouseY = e.clientY - centerH;
+        let coor = "From the center</br> X: " + mouseX + ", Y: " + mouseY;
+        mouseCenter.innerHTML = coor;
+
+        person.style.transform = 'translateX(' + mouseX/70 + '%) translateY(' + mouseY/150 + '%)';
+    };
+    
+    function clearCoor() {
+        mouse.innerHTML = "Move your mouse";
+        mouseCenter.innerHTML = "Move your mouse";
+    };
+    </script>
+</body>
+</html>
